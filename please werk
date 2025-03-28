@@ -1,0 +1,181 @@
+pages/index.jsx import React, { useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function JorgePortfolio() {
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    sections.forEach((sec) => {
+      sec.classList.add("opacity-0");
+      sec.classList.add("translate-y-4");
+    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    sections.forEach((sec) => observer.observe(sec));
+  }, []);
+
+  const works = [
+    {
+      title: "City in Grain",
+      description: "A filmic look over Manhattan — hazy, distant, and timeless.",
+      image: "/IMG_9562.JPG"
+    },
+    {
+      title: "Echoes of Sound",
+      description: "Live concert — light, silhouette, and emotion in motion.",
+      image: "/IMG_9782.JPG"
+    },
+    {
+      title: "Chinatown at Midnight",
+      description: "Lanterns, neon, and fleeting conversations on cold sidewalks.",
+      image: "/IMG_9560.JPG"
+    },
+    {
+      title: "San Sebastián Stillness",
+      description: "Golden hour on a quiet beach in Spain — cinematic and serene.",
+      image: "/IMG_8266.JPG"
+    },
+    {
+      title: "Sanctuary Light",
+      description: "Light spilling through palace columns — sacred and silent.",
+      image: "/IMG_8238.JPG"
+    },
+    {
+      title: "Monochrome Wild",
+      description: "A black-and-white study of wildlife — raw and intimate.",
+      image: "/IMG_3439.JPG"
+    },
+    {
+      title: "Solitude Rock",
+      description: "Waves crash against a lone stone — solitude, strength, simplicity.",
+      image: "/IMG_3049.JPG"
+    },
+    {
+      title: "Moonlight Boy",
+      description: "Festival lights and soft faces — a night remembered in glow.",
+      image: "/IMG_2118.JPG"
+    },
+    {
+      title: "Through the Glass",
+      description: "A city diner glows behind fogged glass — soft, intimate, warm.",
+      image: "/7BAA2B2C-AF5F-432C-80EA-97E929BF6BB7_1_201_a.jpeg"
+    }
+  ];
+
+  return (
+    <main className="min-h-screen bg-black text-white font-sans">
+      <style>{`
+        .fade-in {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          transition: all 1.2s ease;
+        }
+        h2 {
+          font-family: 'Georgia', serif;
+        }
+      `}</style>
+
+      {/* Hero Section */}
+      <section className="relative h-screen w-full flex flex-col items-center justify-center text-center overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
+        >
+          <source src="https://cdn.pxlv.io/thekairos/website.mp4" type="video/mp4" />
+        </video>
+        <div className="z-10 px-4">
+          <h1 className="text-5xl md:text-7xl font-light tracking-wide">Jorge Lopez</h1>
+          <p className="text-lg mt-2">Portfolio <span className="text-neutral-400">/ The Kairos Project</span></p>
+          <nav className="flex gap-6 mt-6 justify-center">
+            <a href="#work" className="hover:underline">
+              Work
+            </a>
+            <a href="#about" className="hover:underline">
+              About
+            </a>
+            <a href="#contact" className="hover:underline">
+              Contact
+            </a>
+          </nav>
+          <div className="mt-10 animate-bounce text-neutral-400">↓</div>
+        </div>
+      </section>
+
+      {/* Featured Project Section (Coming Soon) */}
+      <section className="px-6 py-20 bg-black text-center">
+        <h2 className="text-4xl font-light mb-6">Featured Project</h2>
+        <p className="text-neutral-500 italic mb-8">Coming soon — a music video that captures everything this project stands for.</p>
+        <div className="aspect-video w-full max-w-4xl mx-auto bg-neutral-800 rounded-2xl flex items-center justify-center">
+          <span className="text-neutral-600">Video placeholder</span>
+        </div>
+      </section>
+
+      {/* Work Section */}
+      <section id="work" className="px-6 py-16 bg-neutral-950">
+        <h2 className="text-4xl mb-2 text-center font-light">Selected Work</h2>
+        <p className="text-center text-neutral-500 mb-8 italic">Curated by The Kairos Project</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {works.map((work, index) => (
+            <Card key={index} className="bg-neutral-900 hover:bg-neutral-800 transition">
+              <CardContent className="p-4">
+                <img src={work.image} alt={work.title} className="aspect-video object-cover w-full mb-4 rounded" />
+                <h3 className="text-xl font-light mb-1">{work.title}</h3>
+                <p className="text-sm text-neutral-400">{work.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section
+        id="about"
+        className="px-6 py-20 bg-black text-neutral-100 max-w-3xl mx-auto text-center"
+      >
+        <h2 className="text-4xl font-light mb-6">About</h2>
+        <img
+          src="/placeholder-portrait.jpg"
+          alt="Jorge Lopez"
+          className="mx-auto mb-6 rounded-2xl w-48 h-48 object-cover"
+        />
+        <p className="text-lg leading-relaxed">
+          Jorge Lopez is a filmmaker and cinematographer drawn to the quiet, poetic
+          moments in everyday life. With a style rooted in authenticity, he captures
+          stories through a lens of natural light, handheld motion, and raw emotion.
+          <br /><br />
+          He works under the creative alias <strong>The Kairos Project</strong> — a name that reflects a devotion to timeless, in-between moments.
+        </p>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="px-6 py-16 bg-neutral-950 text-center">
+        <h2 className="text-4xl font-light mb-6">Get in Touch</h2>
+        <p className="mb-4">
+          For work inquiries, collaborations, or just to say hello:
+        </p>
+        <a
+          href="mailto:thekairosprojects@gmail.com"
+          className="text-blue-400 hover:underline text-lg"
+        >
+          thekairosprojects@gmail.com
+        </a>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-neutral-600 text-center text-sm py-6 border-t border-neutral-800">
+        © {new Date().getFullYear()} Jorge Lopez / The Kairos Project · <a href="mailto:thekairosprojects@gmail.com" className="hover:underline">thekairosprojects@gmail.com</a>
+      </footer>
+    </main>
+  );
+}
